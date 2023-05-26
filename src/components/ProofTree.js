@@ -7,7 +7,7 @@ const proofTreeData = {
   name: 'CEO',
   children: [
     {
-      name: 'ManagerTESTING',
+      name: 'Manager',
       attributes: {
         department: 'Production',
       },
