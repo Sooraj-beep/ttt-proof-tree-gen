@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ttt-proof-tree-gen/static/css/main.a240c550.css",
-    "main.js": "/ttt-proof-tree-gen/static/js/main.b2329990.js",
+    "main.js": "/ttt-proof-tree-gen/static/js/main.ce1027d6.js",
     "index.html": "/ttt-proof-tree-gen/index.html",
     "main.a240c550.css.map": "/ttt-proof-tree-gen/static/css/main.a240c550.css.map",
-    "main.b2329990.js.map": "/ttt-proof-tree-gen/static/js/main.b2329990.js.map"
+    "main.ce1027d6.js.map": "/ttt-proof-tree-gen/static/js/main.ce1027d6.js.map"
   },
   "entrypoints": [
     "static/css/main.a240c550.css",
-    "static/js/main.b2329990.js"
+    "static/js/main.ce1027d6.js"
   ]
 }
