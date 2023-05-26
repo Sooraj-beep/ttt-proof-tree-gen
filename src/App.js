@@ -1,34 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-import minimax from './utils/minimax';
+import { Box, Button, Container } from "@mui/material";
+import Test from "./components/Test";
+import minimax from "./utils/minimax";
+import Board from "./components/Board";
+import { useState } from "react";
 
 function App() {
-  const board = [
-        ['X', 'O', ''],
-        ['', 'O', ''],
-        ['', '', 'X']
-      ];
-      const player = 'X';
-      const result = minimax(board, player);
-      console.log('Best move:', result.move);
-      console.log('Board score:', result.score);
+  const [boardState, setBoardState] = useState([Array(9).fill(" ")]);
+  const [player, setPlayer] = useState("X");
+
+  // const result = minimax(board, player);
+  // console.log("Best move:", result.move);
+  // console.log("Board score:", result.score);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        
-      </header>
+    <div>
+      <Box
+        display="flex"
+        flexDirection={"column"}
+        maxWidth={400}
+        alignItems={"center"}
+        justifyContent={"center"}
+        margin={"auto"}
+        marginTop={10}
+        padding={2}
+        borderRadius={5}
+        boxShadow={'5px 5px 10px #ccc'}
+      >
+        <Board boardState={boardState} player={player} setBoardState={setBoardState} setPlayer={setPlayer}></Board>
+        <Button variant="contained" margin="normal" color="success">Generate Proof Tree</Button>
+      </Box>
     </div>
   );
 }
