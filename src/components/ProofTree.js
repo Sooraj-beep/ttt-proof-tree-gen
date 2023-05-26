@@ -1,52 +1,39 @@
-import React from 'react';
-import Tree from 'react-d3-tree';
+import React, { Children } from "react";
+import Tree from "react-d3-tree";
+import { ProofTreeNode } from "./ProofTreeNode";
 
 // This is a simplified example of an org chart with a depth of 2.
 // Note how deeper levels are defined recursively via the `children` property.
 const proofTreeData = {
-  name: 'CEO',
+  values: "CEO",
   children: [
     {
-      name: 'Manager',
-      attributes: {
-        department: 'Production',
-      },
-      children: [
-        {
-          name: 'Foreman',
-          attributes: {
-            department: 'Fabrication',
-          },
-          children: [
-            {
-              name: 'Worker',
-            },
-          ],
-        },
-        {
-          name: 'Foreman',
-          attributes: {
-            department: 'Assembly',
-          },
-          children: [
-            {
-              name: 'Worker',
-            },
-          ],
-        },
-      ],
+      values: "Manager",
     },
-  ],
+    {
+      values: "Manager",
+    }
+  ]
 };
 
 export default function ProofTree() {
+  const nodeSize = { x: 250, y: 250 };
+  const foreignObjectProps = {
+    width: nodeSize.x,
+    height: nodeSize.y,
+    x: -125,
+    y: -10,
+  };
   return (
     // `<Tree />` will fill width/height of its container; in this case `#treeWrapper`.
-    <div id="treeWrapper" style={{ width: '50em', height: '20em' }}
-      orien
-    >
-      <Tree data={proofTreeData} 
-      orientation='vertical'
+    <div style={{ height: "100vh", width: "100vw" }}>
+      <Tree
+        nodeSize={nodeSize}
+        data={proofTreeData}
+        orientation="vertical"
+        renderCustomNodeElement={(rd3tProps) =>
+          ProofTreeNode({ ...rd3tProps, foreignObjectProps})
+        }
       />
     </div>
   );

@@ -6,7 +6,7 @@ import { useState } from "react";
 import ProofTree from "./components/ProofTree";
 
 function App() {
-  const [boardState, setBoardState] = useState([Array(9).fill(" ")]);
+  const [boardState, setBoardState] = useState([Array(9).fill("")]);
   const [player, setPlayer] = useState("X");
 
   // const result = minimax(board, player);
@@ -27,9 +27,25 @@ function App() {
         boxShadow={'5px 5px 10px #ccc'}
       >
         <Board boardState={boardState} player={player} setBoardState={setBoardState} setPlayer={setPlayer}></Board>
-        <Button variant="contained" margin="normal" color="success">Generate Proof Tree</Button>
+        <Button variant="contained" margin="normal" color="success"
+          onClick={() => { 
+            // convert boardState to 2d array
+            // ex: [X, O, X, O, X, O, X, O, X] -> [[X, O, X], [O, X, O], [X, O, X]]
+            const boardMatrix = boardState[0].reduce((rows, key, index) => (index % 3 === 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows, []);
+            const mockBoard = [
+              ['X', 'O', ''], 
+              ['X', 'O', 'O'], 
+              ['X', '', 'X']];
+            console.log(boardMatrix);
+            console.log(mockBoard);
+            const result = minimax(mockBoard, 'X');
+            console.log("Best move:", result.move);
+            console.log("Board score:", result.score);
+          
+          }}
+        >Generate Proof Tree</Button>
       </Box>
-      <ProofTree></ProofTree>
+        <ProofTree></ProofTree>
     </div>
   );
 }

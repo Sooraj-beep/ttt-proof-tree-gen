@@ -16,7 +16,7 @@ function Tile({pos, boardState, player, setBoardState, setPlayer}) {
       <CustomPaper
         onClick={() => {
             console.log(boardState[0][pos]);
-            if (boardState[0][pos] === " ") {
+            if (boardState[0][pos] === "") {
                 console.log("clicked");
                 const newBoardState = [...boardState];
                 newBoardState[0][pos] = player[0];
