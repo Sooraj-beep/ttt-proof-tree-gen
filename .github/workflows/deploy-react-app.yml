@@ -28,4 +28,13 @@ jobs:
         run: npm run predeploy
         
       - name: Deploy to GitHub Pages
-        run: npm run deploy -- -m "Deploy React app to GitHub Pages"
+        run: | 
+          git config --global user.name $user_name
+          git config --global user.email $user_email config 
+          git remote set-url origin https://${github_token}@github.com/${repository}
+          npm run deploy -- -m "Deploy React app to GitHub Pages"
+        env:
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+          repository: ${{ github.repository }} 
