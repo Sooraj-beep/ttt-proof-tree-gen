@@ -3,6 +3,7 @@ import Test from "./components/Test";
 import minimax from "./utils/minimax";
 import Board from "./components/Board";
 import { useState } from "react";
+import ProofTree from "./components/ProofTree";
 
 function App() {
   const [boardState, setBoardState] = useState([Array(9).fill(" ")]);
@@ -28,6 +29,7 @@ function App() {
         <Board boardState={boardState} player={player} setBoardState={setBoardState} setPlayer={setPlayer}></Board>
         <Button variant="contained" margin="normal" color="success">Generate Proof Tree</Button>
       </Box>
+      <ProofTree></ProofTree>
     </div>
   );
 }
