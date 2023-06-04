@@ -4,10 +4,12 @@ import minimax from "./utils/minimax";
 import Board from "./components/Board";
 import { useState } from "react";
 import ProofTree from "./components/ProofTree";
+import GenerateProofTree from "./utils/GenerateProofTree";
 
 function App() {
   const [boardState, setBoardState] = useState([Array(9).fill("")]);
   const [player, setPlayer] = useState("X");
+  const [graphData, setGraphData] = useState(null);
 
   // const result = minimax(board, player);
   // console.log("Best move:", result.move);
@@ -32,20 +34,15 @@ function App() {
             // convert boardState to 2d array
             // ex: [X, O, X, O, X, O, X, O, X] -> [[X, O, X], [O, X, O], [X, O, X]]
             const boardMatrix = boardState[0].reduce((rows, key, index) => (index % 3 === 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows, []);
-            const mockBoard = [
-              ['X', 'O', ''], 
-              ['X', 'O', 'O'], 
-              ['X', '', 'X']];
-            console.log(boardMatrix);
-            console.log(mockBoard);
-            const result = minimax(mockBoard, 'X');
-            console.log("Best move:", result.move);
-            console.log("Board score:", result.score);
-          
+            setGraphData(GenerateProofTree(boardMatrix, 'X', 'O'));
+            console.log("boardMatrix ", graphData);
+  
           }}
         >Generate Proof Tree</Button>
       </Box>
-        <ProofTree></ProofTree>
+        {
+          graphData && <ProofTree graphData={graphData}></ProofTree>
+        }
     </div>
   );
 }

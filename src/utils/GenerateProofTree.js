@@ -22,31 +22,36 @@ const getAllPossibleMoves = (board, playerToMove) => {
 // given a board, a move, and a player, return a new board with the move made
 const makeMove = (board, move, player) => {
     const newBoard = JSON.parse(JSON.stringify(board));
+    console.log("move", move);
+    console.log("newBoard", newBoard);
     newBoard[move[0]][move[1]] = player;
     return newBoard;
 }
 
 
 export default function GenerateProofTree(boardState, playerToMove, player) {
-    graphData = {
+    var graphData = {
+        // convert boardstate to a string and use that as name
+        name: boardState.toString(),
         values: boardState,
     }
 
     // if game is over, return null
     const result = minimax(boardState, playerToMove);   
-    if (result === null) {
+    console.log("result", result);
+    if (result.move === null) {
         return graphData;
     }
 
     // if game is not over, generate proof tree
     // if playerToMove is the player, then make result.move and add it to the graphData
     if (playerToMove === player) {
+        console.log(result.move);
         const newBoard = makeMove(boardState, result.move, playerToMove);
         graphData.children = [GenerateProofTree(newBoard, playerToMove === 'X' ? 'O' : 'X', player)];
     } else {
-        // if playerToMove is not the player, then generate all possible moves and call minimax on each of them
+        // if playerToMove is not the player, then generate all possible moves and add them to the graphData, call GenerateProofTree on each of them
         const possibleMoves = getAllPossibleMoves(boardState, playerToMove);
-        // make each move on the board and add it to the graphData
         graphData.children = [];
         for (let i = 0; i < possibleMoves.length; i++) {
             const move = possibleMoves[i];
@@ -54,5 +59,5 @@ export default function GenerateProofTree(boardState, playerToMove, player) {
             graphData.children.push(GenerateProofTree(newBoard, playerToMove === 'X' ? 'O' : 'X', player));
         }
     }
-
+    return graphData;
 }
